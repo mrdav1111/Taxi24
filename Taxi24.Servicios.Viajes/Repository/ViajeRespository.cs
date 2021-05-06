@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,12 +45,12 @@ namespace Taxi24.Servicios.Viajes.Repository
 
         public IEnumerable<Viaje> Lista(long empresaId)
         {
-            return _context.Viajes.Where(v => v.EmpresaID == empresaId);
+            return _context.Viajes.Where(v => v.EmpresaID == empresaId).AsNoTracking();
         }
 
         public Viaje ObtenerPorID(long viajeID)
         {
-            return _context.Viajes.Where(v => v.ID == viajeID).FirstOrDefault();
+            return _context.Viajes.Where(v => v.ID == viajeID).AsNoTracking().FirstOrDefault();
         }
     }
 }

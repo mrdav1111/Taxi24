@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace Taxi24.Servicios.Facturas.Repositories
 
         public IEnumerable<Factura> Lista(long empresaID)
         {
-            return _context.Facturas.Where(f => f.EmpresaID == empresaID);
+            return _context.Facturas.Where(f => f.EmpresaID == empresaID).AsNoTracking();
         }
     }
 }

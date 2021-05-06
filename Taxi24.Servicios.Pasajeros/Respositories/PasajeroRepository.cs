@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,12 +57,12 @@ namespace Taxi24.Servicios.Pasajeros.Respositories
 
         public IEnumerable<Pasajero> Lista(long empresaId)
         {
-            return _context.Pasajeros.Where(p => p.EmpresaID == empresaId);
+            return _context.Pasajeros.Where(p => p.EmpresaID == empresaId).AsNoTracking();
         }
 
         public Pasajero ObtenerPorId(long Id)
         {
-            return _context.Pasajeros.Where(p => p.ID == Id).FirstOrDefault();
+            return _context.Pasajeros.Where(p => p.ID == Id).AsNoTracking().FirstOrDefault();
         }
     }
 }

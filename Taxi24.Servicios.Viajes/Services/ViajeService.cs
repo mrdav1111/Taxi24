@@ -27,9 +27,9 @@ namespace Taxi24.Servicios.Viajes.Services
 
             if (!oldEntity.Final.HasValue && entity.Final.HasValue)
             {
+                _mqClient.BroadcastViajeCompletado(entity);
             }
 
-            _mqClient.BroadcastViajeCompletado(entity);
             return entity.ObtenerDto();
         }
 

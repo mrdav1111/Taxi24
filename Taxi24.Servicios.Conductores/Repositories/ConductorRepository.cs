@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -70,24 +71,24 @@ namespace Taxi24.Servicios.Conductores.Repositories
                     && c.Longitud >= longitudMinima
                     && c.Latitud <= latitudMaxima
                     && c.Latitud >= latitudMinima
-                );
+                ).AsNoTracking();
 
             return conductures;
         }
 
         public IEnumerable<Conductor> ObtenerConductoresDisponibles(long empresaId)
         {
-            return _context.Conductores.Where(c => c.Disponible && c.EmpresaID == empresaId);
+            return _context.Conductores.Where(c => c.Disponible && c.EmpresaID == empresaId).AsNoTracking();
         }
 
         public Conductor ObtenerConductorPorID(long id)
         {
-            return _context.Conductores.Where(c => c.ID == id).FirstOrDefault();
+            return _context.Conductores.Where(c => c.ID == id).AsNoTracking().FirstOrDefault();
         }
 
         public IEnumerable<Conductor> ObtenerListaConductores(long empresaId)
         {
-            return _context.Conductores.Where(c => c.EmpresaID == empresaId);
+            return _context.Conductores.Where(c => c.EmpresaID == empresaId).AsNoTracking();
         }
     }
 }

@@ -80,9 +80,10 @@ namespace Taxi24.Servicios.Facturas.BackgroundServices
                 {
                     ConductorID = viaje.PilotoID,
                     Fecha = DateTime.Now,
-                    Monto = (viaje.Inicio - viaje.Final).Value.TotalMilliseconds,
+                    Monto = (viaje.Final - viaje.Inicio).Value.TotalMilliseconds / 1000,
                     ViajeID = viaje.ID,
-                    ViajeroID = viaje.PasajeroID
+                    ViajeroID = viaje.PasajeroID,
+                    EmpresaID = viaje.EmpresaID
                 });
                 _logger.LogInformation("Factura Creada");
             }
@@ -94,8 +95,16 @@ namespace Taxi24.Servicios.Facturas.BackgroundServices
         public override void Dispose()
         {
             base.Dispose();
-            connection.Close();
-            channel.Close();
+            if (connection != null)
+            {
+                connection.Close();
+
+            }
+            if (channel != null)
+            {
+                channel.Close();
+
+            }
 
         }
     }
