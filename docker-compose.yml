@@ -1,0 +1,69 @@
+version: "3.9"
+services:
+  rest:
+    build: 
+      context: .
+      dockerfile: ./Taxi24.Gateways.REST/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+    depends_on:
+      - conductores
+      - facturas
+      - pasajeros
+      - viajes
+
+  conductores:
+    build: 
+      context: .
+      dockerfile: ./Taxi24.Servicios.Conductores/Dockerfile
+    depends_on:
+      - database
+
+  facturas:
+    build: 
+      context: .
+      dockerfile: ./Taxi24.Servicios.Facturas/Dockerfile
+    depends_on:
+      - database
+      - rabbit
+
+  pasajeros:
+    build: 
+      context: .
+      dockerfile: ./Taxi24.Servicios.Pasajeros/Dockerfile
+    depends_on:
+      - database
+
+  viajes:
+    build: 
+      context: .
+      dockerfile: ./Taxi24.Servicios.Viajes/Dockerfile
+    depends_on:
+      - database
+      - rabbit
+
+  rabbit:
+    image: "rabbitmq"
+
+  pgadmin:
+    image: "dpage/pgadmin4"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@db.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports: 
+      - "15432:80"
+    depends_on: 
+      - database
+
+  database:
+    image: "postgres"
+    volumes:
+      - data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: besttaxiservice24
+
+volumes:
+  data:
+  

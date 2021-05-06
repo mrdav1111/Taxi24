@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "Taxi24.Servicios.Interno";
+
+import "timestamp.proto";
+
+package Taxi24;
+
+service Viajes {
+	rpc ObtenerLista(ObtenerListaRequest) returns (ObtenerListaResponse){}
+	rpc ObtenerPorID(ObtenerPorIDRequest) returns (ViajeDTO){}
+	rpc Crear(CrearViajeRequest) returns (ViajeDTO){}
+	rpc Actualizar(ActualizarViajeRequest) returns (ViajeDTO){}
+}
+
+message ObtenerListaRequest {
+    int64 EmpresaID = 1;
+}
+
+message ObtenerListaResponse {
+    repeated ViajeDTO Viajes = 1;
+}
+
+message ObtenerPorIDRequest {
+    int64 ViajeID = 1;
+}
+message CrearViajeRequest {
+    ViajeDTO Viaje = 1;
+}
+
+message ActualizarViajeRequest {
+    int64 ViajeID = 1;
+    ViajeDTO Viaje = 2;
+}
+
+message ViajeDTO {
+    int64 ID = 1;
+    int64 EmpresaID = 2;
+    int64 PilotoID = 3;
+    int64 PasajeroID = 4;
+    google.protobuf.Timestamp Inicio = 5;
+    google.protobuf.Timestamp Final = 6;
+}

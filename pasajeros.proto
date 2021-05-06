@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option csharp_namespace = "Taxi24.Servicios.Interno";
+
+package Taxi24;
+
+
+service Pasajeros {
+	rpc Crear(CrearPasajeroRequest) returns (PasajeroDTO){}
+	rpc ObtenerPorId(ObtenerPasajeroPorIdRequest) returns (PasajeroDTO){}
+	rpc ObtenerLista(ObtenerListaPasajerosRequest) returns (ObtenerListaPasajerosResponse){}
+	rpc Actualizar(ActualizarPasajeroRequest) returns (PasajeroDTO){}
+	rpc Eliminar(EliminarPasajeroRequest) returns (PasajeroDTO){}
+}
+
+message CrearPasajeroRequest {
+	PasajeroDTO Pasajero = 1;
+}
+
+message ObtenerPasajeroPorIdRequest {
+	int64 PasajeroID = 1;
+}
+
+message ObtenerListaPasajerosRequest {
+	int64 EmpresaID = 1;
+}
+
+message ActualizarPasajeroRequest {
+	int64 PasajeroID = 1;
+	PasajeroDTO Pasajero = 2;
+}
+
+message EliminarPasajeroRequest {
+	int64 PasajeroID = 1;
+}
+
+message ObtenerListaPasajerosResponse {
+	repeated PasajeroDTO Pasajeros = 1;
+}
+
+message PasajeroDTO {
+	int64 ID = 1;
+	int64 EmpresaID = 2;
+	string Nombre = 3;
+}

@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option csharp_namespace = "Taxi24.Servicios.Interno";
+
+package Taxi24;
+
+
+service Conductores {
+	rpc CrearConductor(ConductorDTO) returns (ConductorDTO){}
+	rpc ObtenerConductorPorID(ObtenerConductorPorIDRequest) returns (ConductorDTO){}
+	rpc ObtenerListaConductores(ObtenerListaConductoresRequest) returns (ListaConductoresResponse){}
+	rpc ObtenerListaConductoresCercanos(ObtenerListaConductoresCercanosRequest) returns (ListaConductoresResponse){}
+	rpc ObtenerListaConductoresDisponibles(ObtenerListaConductoresDisponiblesRequest) returns (ListaConductoresResponse){}
+	rpc ActualizarConductor(ActualizarConductorRequest) returns (ConductorDTO){}
+	rpc EliminarConductor(EliminarConductorRequest) returns (ConductorDTO){}
+}
+
+message ObtenerConductorPorIDRequest {
+	int64 ID = 1;
+}
+
+message ObtenerListaConductoresRequest {
+	int64 EmpresaId = 1;
+}
+
+message ObtenerListaConductoresCercanosRequest {
+	int64 EmpresaId = 1;
+	double Longitud = 2;
+	double Latitud = 3;
+	double Distancia = 4;
+}
+
+message ObtenerListaConductoresDisponiblesRequest {
+	int64 EmpresaId = 1;
+}
+
+message ListaConductoresResponse {
+	repeated ConductorDTO Conductores = 1;
+}
+
+message ActualizarConductorRequest {
+	int64 ID = 1;
+	ConductorDTO Conductor = 2;
+}
+
+message EliminarConductorRequest {
+	int64 ID = 1;
+}
+
+message ConductorDTO {
+	string Nombre = 1;
+	int64 EmpresaId = 2;
+	int64 ID = 3;
+	bool Disponible = 4;
+	double Longitud = 5;
+	double Latitud = 6;
+}
+

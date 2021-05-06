@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "Taxi24.Servicios.Interno";
+import "timestamp.proto";
+
+
+package Taxi24;
+
+service Facturas {
+	rpc Lista(ObtenerListaFacturasRequest) returns (ObtenerListaFacturasResponse){}
+}
+
+message ObtenerListaFacturasRequest {
+	int64 EmpresaID = 1;
+}
+
+message ObtenerListaFacturasResponse {
+	repeated FacturaDTO Facturas = 1;
+}
+
+message FacturaDTO {
+	int64 ID = 1;
+	google.protobuf.Timestamp Fecha = 2;
+	int64 ViajeID = 3;
+	int64 ViajeroID = 4;
+	double Monto = 5;
+	int64 EmpresaID = 6;
+}
