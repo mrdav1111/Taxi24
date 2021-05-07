@@ -48,12 +48,12 @@ namespace Taxi24.Gateways.REST.Controllers
             {
                 Distancia = 5,
                 EmpresaId = request.EmpresaId,
-                Latitud = request.LongitudInicial,
-                Longitud = request.LatitudInicial
+                Latitud = request.LatitudInicial,
+                Longitud = request.LongitudInicial
             })
             .Conductores
-            .OrderBy(c => CoordenadasHelper.Distancia(c.Latitud, c.Longitud, request.LatitudInicial, request.LongitudInicial))
             .Where(c => c.Disponible)
+            .OrderBy(c => CoordenadasHelper.Distancia(c.Latitud, c.Longitud, request.LatitudInicial, request.LongitudInicial))
             .Select(c => c.ObtenerEntidad())
             .FirstOrDefault();
 
@@ -73,6 +73,10 @@ namespace Taxi24.Gateways.REST.Controllers
                 }
             });
 
+            conductorCercano.Disponible = false;
+
+            _conductoresClient.ActualizarConductor(new ActualizarConductorRequest { ID = conductorCercano.ID, Conductor = conductorCercano.ObtenerDto() });
+
             return solicitudDeViaje.ObtenerEntidad();
         }
 
@@ -87,10 +91,14 @@ namespace Taxi24.Gateways.REST.Controllers
             try
             {
                 var viaje = _viajesClient.ObtenerPorID(new ObtenerPorIDRequest { ViajeID = id });
+                var conductor = _conductoresClient.ObtenerConductorPorID(new ObtenerConductorPorIDRequest { ID = viaje.PilotoID });
 
                 viaje.Final = Timestamp.FromDateTime(DateTime.UtcNow);
 
                 viaje = _viajesClient.Actualizar(new ActualizarViajeRequest { ViajeID = id, Viaje = viaje });
+
+                conductor.Disponible = true;
+                _conductoresClient.ActualizarConductor(new ActualizarConductorRequest { ID = viaje.PilotoID, Conductor = conductor });
 
                 return viaje.ObtenerEntidad();
 

@@ -25,6 +25,7 @@ namespace Taxi24.Servicios.Conductores.Repositories
                 dbConductor.Latitud = conductor.Latitud;
                 dbConductor.Longitud = conductor.Longitud;
                 dbConductor.Nombre = conductor.Nombre;
+                dbConductor.Disponible = conductor.Disponible;
 
                 _context.SaveChanges();
 

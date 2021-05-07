@@ -13,6 +13,7 @@ services:
       - facturas
       - pasajeros
       - viajes
+    restart: on-failure
 
   conductores:
     build: 
@@ -20,6 +21,7 @@ services:
       dockerfile: ./Taxi24.Servicios.Conductores/Dockerfile
     depends_on:
       - database
+    restart: on-failure
 
   facturas:
     build: 
@@ -28,6 +30,7 @@ services:
     depends_on:
       - database
       - rabbit
+    restart: on-failure
 
   pasajeros:
     build: 
@@ -35,6 +38,7 @@ services:
       dockerfile: ./Taxi24.Servicios.Pasajeros/Dockerfile
     depends_on:
       - database
+    restart: on-failure
 
   viajes:
     build: 
@@ -43,9 +47,11 @@ services:
     depends_on:
       - database
       - rabbit
+    restart: on-failure
 
   rabbit:
     image: "rabbitmq"
+    restart: on-failure
 
   pgadmin:
     image: "dpage/pgadmin4"
@@ -63,6 +69,7 @@ services:
       - data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: besttaxiservice24
+    restart: on-failure
 
 volumes:
   data:
