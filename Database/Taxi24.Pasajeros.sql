@@ -5,7 +5,7 @@
 -- Dumped from database version 12.4 (Debian 12.4-1.pgdg100+1)
 -- Dumped by pg_dump version 13.2
 
--- Started on 2021-05-07 01:09:23 UTC
+-- Started on 2021-05-11 00:36:41 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -70,11 +70,9 @@ ALTER TABLE public."__EFMigrationsHistory" OWNER TO postgres;
 -- Data for Name: Pasajeros; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Pasajeros" ("ID", "EmpresaID", "Nombre") FROM stdin;
-1	1	Angel
-2	1	Katherine
-3	1	Gilby
-\.
+INSERT INTO public."Pasajeros" ("ID", "EmpresaID", "Nombre") VALUES (1, 1, 'Angel');
+INSERT INTO public."Pasajeros" ("ID", "EmpresaID", "Nombre") VALUES (2, 1, 'Katherine');
+INSERT INTO public."Pasajeros" ("ID", "EmpresaID", "Nombre") VALUES (3, 1, 'Gilby');
 
 
 --
@@ -83,9 +81,7 @@ COPY public."Pasajeros" ("ID", "EmpresaID", "Nombre") FROM stdin;
 -- Data for Name: __EFMigrationsHistory; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") FROM stdin;
-20210506134417_init	5.0.5
-\.
+INSERT INTO public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") VALUES ('20210506134417_init', '5.0.5');
 
 
 --
@@ -115,7 +111,7 @@ ALTER TABLE ONLY public."__EFMigrationsHistory"
     ADD CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId");
 
 
--- Completed on 2021-05-07 01:09:23 UTC
+-- Completed on 2021-05-11 00:36:42 UTC
 
 --
 -- PostgreSQL database dump complete

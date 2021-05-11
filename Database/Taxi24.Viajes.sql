@@ -5,7 +5,7 @@
 -- Dumped from database version 12.4 (Debian 12.4-1.pgdg100+1)
 -- Dumped by pg_dump version 13.2
 
--- Started on 2021-05-07 01:12:10 UTC
+-- Started on 2021-05-11 00:40:00 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -73,10 +73,8 @@ ALTER TABLE public."__EFMigrationsHistory" OWNER TO postgres;
 -- Data for Name: Viajes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Viajes" ("ID", "EmpresaID", "PilotoID", "PasajeroID", "Inicio", "Final") FROM stdin;
-1	1	4	1	2021-05-07 00:55:44.876639	2021-05-07 00:59:38.959963
-34	1	4	1	2021-05-07 00:59:47.729495	2021-05-07 01:00:41.110597
-\.
+INSERT INTO public."Viajes" ("ID", "EmpresaID", "PilotoID", "PasajeroID", "Inicio", "Final") VALUES (1, 1, 4, 1, '2021-05-07 00:55:44.876639', '2021-05-07 00:59:38.959963');
+INSERT INTO public."Viajes" ("ID", "EmpresaID", "PilotoID", "PasajeroID", "Inicio", "Final") VALUES (34, 1, 4, 1, '2021-05-07 00:59:47.729495', '2021-05-07 01:00:41.110597');
 
 
 --
@@ -85,10 +83,8 @@ COPY public."Viajes" ("ID", "EmpresaID", "PilotoID", "PasajeroID", "Inicio", "Fi
 -- Data for Name: __EFMigrationsHistory; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") FROM stdin;
-20210506155247_init	5.0.5
-20210506193959_rename	5.0.5
-\.
+INSERT INTO public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") VALUES ('20210506155247_init', '5.0.5');
+INSERT INTO public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") VALUES ('20210506193959_rename', '5.0.5');
 
 
 --
@@ -118,7 +114,7 @@ ALTER TABLE ONLY public."__EFMigrationsHistory"
     ADD CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId");
 
 
--- Completed on 2021-05-07 01:12:10 UTC
+-- Completed on 2021-05-11 00:40:00 UTC
 
 --
 -- PostgreSQL database dump complete
